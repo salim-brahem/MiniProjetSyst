@@ -1,42 +1,45 @@
 package Client;
-
 import java.io.*;
 import java.net.*;
-import java.util.Scanner;
 
 public class ChatClient {
     private static final String SERVER_ADDRESS = "localhost";
-    private static final int PORT = 9093;
+    private static final int SERVER_PORT = 12345;
 
     public static void main(String[] args) {
-        try (Socket socket = new Socket(SERVER_ADDRESS, PORT)) {
-            System.out.println("Connected to the chat server.");
+        try {
+            Socket socket = new Socket(SERVER_ADDRESS, SERVER_PORT);
+            PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            BufferedReader userInput = new BufferedReader(new InputStreamReader(System.in));
 
-            BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            PrintWriter writer = new PrintWriter(socket.getOutputStream(), true);
+            // Ajout d'un message d'invite
+            System.out.println("Veuillez entrer votre message :");
 
-            Thread readThread = new Thread(() -> {
-                String message;
-                try {
-                    while ((message = reader.readLine()) != null) {
-                        System.out.println("Received message: " + message);
-                    }
-                } catch (IOException e) {
-                    System.err.println("Error reading from server: " + e.getMessage());
+            String userInputLine;
+            while ((userInputLine = userInput.readLine()) != null) {
+                out.println(userInputLine);
+                String serverResponse = in.readLine();
+                if (serverResponse != null) {
+                    System.out.println(serverResponse);
                 }
-            });
-            readThread.start();
 
-            try (Scanner scanner = new Scanner(System.in)) {
-                String input;
-                while (true) {
-                    input = scanner.nextLine();
-                    writer.println(input);
+                // Ajoutez une condition pour terminer la conversation
+                if (userInputLine.equalsIgnoreCase("quit") || userInputLine.equalsIgnoreCase("exit")) {
+                    break;
                 }
+
+                // Afficher à nouveau le message d'invite
+                System.out.println("Veuillez entrer votre message :");
             }
+
+            // Fermer les flux et le socket
+            out.close();
+            in.close();
+            userInput.close();
+            socket.close();
         } catch (IOException e) {
-            System.err.println("Error in the chat client: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 }
-
