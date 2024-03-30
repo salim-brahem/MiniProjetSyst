@@ -1,6 +1,19 @@
+Ce projet contient les implémentations des services de gestion de tâches utilisant Java RMI, gRPC et les sockets.
+
+## Structure du Répertoire
+
+Le répertoire du projet contient les éléments suivants :
+
+1. **ProjetRmi** : Contient les fichiers pour le service de gestion de tâches utilisant Java RMI.
+2. **ProjetGRPC** : Contient les fichiers pour le service de messagerie utilisant gRPC.
+3. **ProjetSocket** : Contient les fichiers pour le service de chat utilisant les sockets.
+
+Chaque sous-répertoire contient le code source ainsi que d'autres fichiers nécessaires pour chaque service respectif.
+
 1/ Gestionnaire de Tâches avec Java RMI
 
 Installation
+
 . Assurez-vous d'avoir Java JDK installé sur votre système.
 . Clonez ce dépôt GitHub sur votre machine locale.
 
