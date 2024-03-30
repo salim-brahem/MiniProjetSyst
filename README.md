@@ -24,7 +24,7 @@ Chaque sous-répertoire contient le code source ainsi que d'autres fichiers néc
 - Exécutez la classe Client pour démarrer le client.
 
 **Utilisation**
-Au démarrage du client, vous serez invité avec un menu vous permettant de choisir parmi plusieurs options :
+-Au démarrage du client, vous serez invité avec un menu vous permettant de choisir parmi plusieurs options :
 - Ajouter une tâche : Permet d'ajouter une nouvelle tâche à la liste.
 - Supprimer une tâche : Permet de supprimer une tâche existante en spécifiant son ID.
 - Afficher la liste des tâches : Affiche la liste complète des tâches actuelles.
