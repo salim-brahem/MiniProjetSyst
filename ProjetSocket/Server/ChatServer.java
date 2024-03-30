@@ -44,43 +44,51 @@ public class ChatServer {
             this.consoleReader = consoleReader;
         }
 
-        public void run() {
-            try {
-                // Initialiser les flux de communication avec le client
-                out = new PrintWriter(clientSocket.getOutputStream(), true);
-                in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+       public void run() {
+    try {
+        // Initialiser les flux de communication avec le client
+        out = new PrintWriter(clientSocket.getOutputStream(), true);
+        in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
-                String inputLine;
-                while ((inputLine = in.readLine()) != null) {
-                    System.out.println("Client: " + inputLine);
-                    
-                    // Exemple de logique pour générer une réponse personnalisée
-                    String response;
-                    if (inputLine.equalsIgnoreCase("Hello")) {
-                        response = "Bonjour!";
-                    } else if (inputLine.equalsIgnoreCase("How are you?")) {
-                        response = "Je vais bien, merci!";
-                    } else {
-                        // Demander la réponse à envoyer au client
-                        System.out.println("Entrez la réponse à envoyer au client:");
-                        response = consoleReader.readLine();
-                    }
-                    
-                    // Envoyer la réponse au client
-                    out.println("Server: " + response);
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-                // Fermer les flux et le socket client
-                try {
-                    out.close();
-                    in.close();
-                    clientSocket.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+        String inputLine;
+        while ((inputLine = in.readLine()) != null) {
+            System.out.println("Client: " + inputLine);
+            
+            // Ajouter une condition pour terminer la conversation côté serveur
+            if (inputLine.equalsIgnoreCase("quit") || inputLine.equalsIgnoreCase("exit")) {
+                // Fermer la connexion socket avant de quitter
+                out.println(inputLine); // Envoyer la commande au client
+                clientSocket.close(); // Fermer la connexion client
+                break;
             }
+            
+            // Exemple de logique pour générer une réponse personnalisée
+            String response;
+            if (inputLine.equalsIgnoreCase("Hello")) {
+                response = "Bonjour!";
+            } else if (inputLine.equalsIgnoreCase("How are you?")) {
+                response = "Je vais bien, merci!";
+            } else {
+                // Demander la réponse à envoyer au client
+                System.out.println("Entrez la réponse à envoyer au client:");
+                response = consoleReader.readLine();
+            }
+            
+            // Envoyer la réponse au client
+            out.println("Server: " + response);
         }
+    } catch (IOException e) {
+        e.printStackTrace();
+    } finally {
+        // Fermer les flux et le socket client
+        try {
+            out.close();
+            in.close();
+            clientSocket.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
     }
 }
