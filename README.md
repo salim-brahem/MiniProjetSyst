@@ -1,4 +1,4 @@
-Ce projet contient les implémentations des services de gestion de tâches utilisant Java RMI, gRPC et les sockets.
+Ce projet consiste à développer des serveurs et des clients en utilisant trois technologies de communication distribuée en Java : Java RMI, gRPC et les sockets.
 
 ## Structure du Répertoire
 
@@ -10,7 +10,7 @@ Le répertoire du projet contient les éléments suivants :
 
 Chaque sous-répertoire contient le code source ainsi que d'autres fichiers nécessaires pour chaque service respectif.
 
-1/ Gestionnaire de Tâches avec Java RMI
+1/ **Gestionnaire de Tâches avec Java RMI**
 
 Installation
 
@@ -30,7 +30,7 @@ Au démarrage du client, vous serez invité avec un menu vous permettant de choi
 - Afficher la liste des tâches : Affiche la liste complète des tâches actuelles.
 - Quitter : Termine l'application.
 
-2/ Service de Messagerie avec gRPC
+2/ **Service de Messagerie avec gRPC**
 
 Prérequis
 - Java JDK installé sur votre système.
@@ -54,7 +54,7 @@ Utilisation
    - Quitter : Termine l'application.
 
      
-3/ Service de Chat avec Sockets
+3/ **Service de Chat avec Sockets**
 
 Prérequis
 - Java JDK installé sur votre système.
